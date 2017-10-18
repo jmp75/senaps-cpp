@@ -53,3 +53,14 @@ make
 ```
 
 [There is a github issue recently logged as I write](https://github.com/swagger-api/swagger-codegen/issues/6512)
+
+Hacking to try to work around.
+I create an Object.h and .cpp implementation by starting from Stream.* files. methods do nothing. I doubt this is correct.
+Still an issue with ApiClient; I need to manually add an implementation for:
+```c++
+    static utility::string_t parameterToString(double value);
+```
+
+OK, now make works out.
+
+Note that this creates a `libSenapsCpp.a`
