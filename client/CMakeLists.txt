@@ -12,8 +12,6 @@ cmake_minimum_required (VERSION 2.8)
 
 #PROJECT's NAME
 project(SenapsCpp)
-set(CPPREST_INCLUDE_DIR /usr/include/cpprest)
-set(CPPREST_LIBRARY_DIR /usr/lib/x86_64-linux-gnu)
 
 
 # THE LOCATION OF OUTPUT BINARIES
@@ -23,7 +21,7 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_LIBRARY_DIR})
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 if(NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE Release)
+set(CMAKE_BUILD_TYPE Release)
 endif()
 
 # BUILD TYPE
@@ -34,12 +32,15 @@ message("A ${CMAKE_BUILD_TYPE} build configuration is detected")
 
 # build and set path to cpp rest sdk
 #set(CPPREST_ROOT ${PROJECT_SOURCE_DIR}/../../../developmentTools/3rdParty/cpprest)
-set(CPPREST_INCLUDE_DIR ${CPPREST_ROOT}/include)
-set(CPPREST_LIBRARY_DIR ${CPPREST_ROOT}/lib)
+# set(CPPREST_INCLUDE_DIR ${CPPREST_ROOT}/include)
+# set(CPPREST_LIBRARY_DIR ${CPPREST_ROOT}/lib)
 
 # if( NOT DEFINED CPPREST_ROOT )
 #     message( FATAL_ERROR "Failed to find cpprest SDK (or missing components). Double check that \"CPPREST_ROOT\" is properly set")
 # endif( NOT DEFINED CPPREST_ROOT )
+
+set(CPPREST_INCLUDE_DIR /usr/include/cpprest)
+set(CPPREST_LIBRARY_DIR /usr/lib/x86_64-linux-gnu)
 
 include_directories(${PROJECT_SOURCE_DIR} api model ${CPPREST_INCLUDE_DIR})
 
