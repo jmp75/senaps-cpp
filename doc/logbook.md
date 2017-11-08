@@ -1,3 +1,24 @@
+# 2017-11-08
+
+Quick test using a [swagger fork by Native Instruments](https://github.com/NativeInstruments/swagger-codegen/tree/feature/cpprest_fix_modelbase_includes) (appeals to my DJ-ing side BTW - self note)
+
+
+```bash
+cd ~/src/tmp
+unzip swagger-codegen-feature-cpprest_fix_modelbase_includes.zip
+
+cd swagger-codegen-feature-cpprest_fix_modelbase_includes
+mvn clean package
+
+SWAGGER_ROOT=~/src/tmp/swagger-codegen-feature-cpprest_fix_modelbase_includes
+cd ~/src/github_jm/senaps-cpp/tmp
+java -jar $SWAGGER_ROOT/modules/swagger-codegen-cli/target/swagger-codegen-cli.jar generate -i https://sensor-cloud.io/api-docs/sensorcloud-spec.json -l cpprest -o ./
+```
+
+Move stuff to client folder
+
+
+
 # 2017-10-18
 
 https://sensor-cloud.io/api-docs/sensorcloud-spec.json
