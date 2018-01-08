@@ -1,47 +1,16 @@
-# 2017-11-08
+# 2018-01-08
 
-Quick test using a [swagger fork by Native Instruments](https://github.com/NativeInstruments/swagger-codegen/tree/feature/cpprest_fix_modelbase_includes) (appeals to my DJ-ing side BTW - self note)
+Getting back to it for a couple hours to check the latest swagger codegen:
 
-
-```bash
-cd ~/src/tmp
-unzip swagger-codegen-feature-cpprest_fix_modelbase_includes.zip
-
-cd swagger-codegen-feature-cpprest_fix_modelbase_includes
-mvn clean package
+```sh
+cd ~/src/tmp/swagger-codegen-master
+mvn clean package 
 
 SWAGGER_ROOT=~/src/tmp/swagger-codegen-feature-cpprest_fix_modelbase_includes
 cd ~/src/github_jm/senaps-cpp/tmp
 java -jar $SWAGGER_ROOT/modules/swagger-codegen-cli/target/swagger-codegen-cli.jar generate -i https://sensor-cloud.io/api-docs/sensorcloud-spec.json -l cpprest -o ./
-```
-
-Move stuff to client folder. Follow instructions from 2017-10-18
-
-```cmd
-cd c:\src\github_jm\senaps-cpp\client\build
-cmake -G "Visual Studio 15 2017" ..
-```
 
 ```
-CMake Error at CMakeLists.txt:14 (project):
-  No CMAKE_C_COMPILER could be found.
-```
-As an aside while googling: check out [vcpkg](https://github.com/Microsoft/vcpkg)
-
-Ended up needing `cmake version 3.10.0-rc4`
-
-Yeah, of course:
-```
-Error	C1083	Cannot open include file: 'cpprest/details/basic_types.h': No such file or directory	SenapsCpp	c:\src\github_jm\senaps-cpp\client\HttpContent.h	26	
-```
-
-Well, vcpkg is an option for cpprest on windows, so let's go. Install vcpkg, see github. 
-Note that cpprest will depend on boost, so the first install will compile boost in multiple mode/architecture - Looooong time.
-
-
-## Windows
-
-After testing it compiles on Debian, check out on windows. 
 
 # 2017-10-18
 
@@ -55,6 +24,7 @@ cd ~/src/github_jm/senaps-cpp/tmp
 SWAGGER_ROOT=~/src/tmp/swagger-codegen-master
 java -jar $SWAGGER_ROOT/modules/swagger-codegen-cli/target/swagger-codegen-cli.jar generate -i https://sensor-cloud.io/api-docs/sensorcloud-spec.json -l cpprest -o ./
 ```
+
 ```sh
 mkdir build
 cd build/
@@ -102,6 +72,7 @@ make
 Hacking to try to work around.
 I create an Object.h and .cpp implementation by starting from Stream.* files. methods do nothing. I doubt this is correct.
 Still an issue with ApiClient; I need to manually add an implementation for:
+
 ```c++
     static utility::string_t parameterToString(double value);
 ```
@@ -109,3 +80,51 @@ Still an issue with ApiClient; I need to manually add an implementation for:
 OK, now make works out.
 
 Note that this creates a `libSenapsCpp.a`
+
+
+
+# 2017-11-08
+
+Quick test using a [swagger fork by Native Instruments](https://github.com/NativeInstruments/swagger-codegen/tree/feature/cpprest_fix_modelbase_includes) (appeals to my DJ-ing side BTW - self note)
+
+
+```bash
+cd ~/src/tmp
+unzip swagger-codegen-feature-cpprest_fix_modelbase_includes.zip
+
+cd swagger-codegen-feature-cpprest_fix_modelbase_includes
+mvn clean package
+
+SWAGGER_ROOT=~/src/tmp/swagger-codegen-feature-cpprest_fix_modelbase_includes
+cd ~/src/github_jm/senaps-cpp/tmp
+java -jar $SWAGGER_ROOT/modules/swagger-codegen-cli/target/swagger-codegen-cli.jar generate -i https://sensor-cloud.io/api-docs/sensorcloud-spec.json -l cpprest -o ./
+```
+
+Move stuff to client folder. Follow instructions from 2017-10-18
+
+```cmd
+cd c:\src\github_jm\senaps-cpp\client\build
+cmake -G "Visual Studio 15 2017" ..
+```
+
+```
+CMake Error at CMakeLists.txt:14 (project):
+  No CMAKE_C_COMPILER could be found.
+```
+As an aside while googling: check out [vcpkg](https://github.com/Microsoft/vcpkg)
+
+Ended up needing `cmake version 3.10.0-rc4`
+
+Yeah, of course:
+```
+Error	C1083	Cannot open include file: 'cpprest/details/basic_types.h': No such file or directory	SenapsCpp	c:\src\github_jm\senaps-cpp\client\HttpContent.h	26	
+```
+
+Well, vcpkg is an option for cpprest on windows, so let's go. Install vcpkg, see github. 
+Note that cpprest will depend on boost, so the first install will compile boost in multiple mode/architecture - Looooong time.
+
+
+## Windows
+
+After testing it compiles on Debian, check out on windows. 
+
