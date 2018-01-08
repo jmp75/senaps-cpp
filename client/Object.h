@@ -11,38 +11,33 @@
  */
 
 /*
- * StreamCollection__embedded.h
+ * Object.h
  *
- * 
+ * This is the implementation of a JSON object.
  */
 
-#ifndef IO_SWAGGER_CLIENT_MODEL_StreamCollection__embedded_H_
-#define IO_SWAGGER_CLIENT_MODEL_StreamCollection__embedded_H_
+#ifndef IO_SWAGGER_CLIENT_MODEL_Object_H_
+#define IO_SWAGGER_CLIENT_MODEL_Object_H_
 
 
-#include "../ModelBase.h"
+#include "ModelBase.h"
 
-#include "Stream.h"
-#include <vector>
+#include <cpprest/details/basic_types.h>
+#include <cpprest/json.h>
 
 namespace io {
 namespace swagger {
 namespace client {
 namespace model {
 
-/// <summary>
-/// 
-/// </summary>
-class  StreamCollection__embedded
-    : public ModelBase
+class  Object : public ModelBase
 {
 public:
-    StreamCollection__embedded();
-    virtual ~StreamCollection__embedded();
+    Object();
+    virtual ~Object();
 
     /////////////////////////////////////////////
     /// ModelBase overrides
-
     void validate() override;
 
     web::json::value toJson() const override;
@@ -52,19 +47,12 @@ public:
     void fromMultiPart(std::shared_ptr<MultipartFormData> multipart, const utility::string_t& namePrefix) override;
 
     /////////////////////////////////////////////
-    /// StreamCollection__embedded members
+    /// Object manipulation
+    web::json::value getValue(const utility::string_t& key) const;
+    void setValue(const utility::string_t& key, const web::json::value& value);
 
-    /// <summary>
-    /// 
-    /// </summary>
-    std::vector<std::shared_ptr<Stream>>& getStreams();
-    bool streamsIsSet() const;
-    void unsetStreams();
-    void setStreams(std::vector<std::shared_ptr<Stream>> value);
-
-protected:
-    std::vector<std::shared_ptr<Stream>> m_Streams;
-    bool m_StreamsIsSet;
+private:
+    web::json::value m_object;
 };
 
 }
@@ -72,4 +60,4 @@ protected:
 }
 }
 
-#endif /* IO_SWAGGER_CLIENT_MODEL_StreamCollection__embedded_H_ */
+#endif /* IO_SWAGGER_CLIENT_MODEL_Object_H_ */
