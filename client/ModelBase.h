@@ -54,6 +54,9 @@ public:
     static web::json::value toJson( double value );
     static web::json::value toJson( bool value );
 
+	template <typename T>
+	static web::json::value toJson(T value);
+
     static int64_t int64_tFromJson(web::json::value& val);
     static int32_t int32_tFromJson(web::json::value& val);
     static float floatFromJson(web::json::value& val);

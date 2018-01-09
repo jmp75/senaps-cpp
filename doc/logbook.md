@@ -12,6 +12,32 @@ java -jar $SWAGGER_ROOT/modules/swagger-codegen-cli/target/swagger-codegen-cli.j
 
 ```
 
+Switching to windows to try to seed out compilation errors. Need vs pro
+
+```cmd
+cd c:\src\github_jm\senaps-cpp\client\build
+cmake -G "Visual Studio 15 2017" ..
+:: Not a typo: needed to cmake -G twice otherwise first
+::  The CMAKE_C_COMPILER:
+::    C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/VC/Tools/MSVC/14.11.25503/bin/HostX86/x86/cl.exe
+::  is not a full path to an existing compiler tool.
+cmake -G "Visual Studio 15 2017" ..
+```
+
+Remember that setting the vs env var first via the dev prompt or scripts you usually use (msvs) may have make it work first time around.
+
+Need to install the following libraries:
+
+```
+vcpkg.exe install cpprest:x64-windows
+vcpkg.exe install boost-uuid:x64-windows
+```
+
+```
+Error	C2665	'io::swagger::client::model::ModelBase::toJson': none of the 9 overloads could convert all the argument types	SenapsCpp	C:\src\github_jm\senaps-cpp\client\api\DefaultApi.cpp	1225	
+```
+the argument body is of type `boost::optional<std::shared_ptr<CollectionPut>>`
+
 # 2017-10-18
 
 https://sensor-cloud.io/api-docs/sensorcloud-spec.json

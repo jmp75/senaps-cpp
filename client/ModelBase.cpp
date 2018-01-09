@@ -58,6 +58,12 @@ web::json::value ModelBase::toJson( std::shared_ptr<HttpContent> content )
     return value;
 }
 
+template <typename T>
+web::json::value toJson(T value)
+{
+    return value::toJson()
+}
+
 std::shared_ptr<HttpContent> ModelBase::fileFromJson(web::json::value& val)
 {
     std::shared_ptr<HttpContent> content(new HttpContent);
