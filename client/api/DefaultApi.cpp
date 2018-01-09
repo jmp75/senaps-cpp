@@ -1233,7 +1233,8 @@ pplx::task<void> DefaultApi::collectionsIdPut(utility::string_t id, boost::optio
         std::shared_ptr<MultipartFormData> multipart(new MultipartFormData);
                 if(body.get())
         {
-            body->toMultipart(multipart, utility::conversions::to_string_t("body"));
+            auto t = body.get();
+            t->toMultipart(multipart, utility::conversions::to_string_t("body"));
         }
 
         httpBody = multipart;
@@ -2347,7 +2348,8 @@ pplx::task<std::shared_ptr<Invitation>> DefaultApi::invitationsPost(boost::optio
         std::shared_ptr<MultipartFormData> multipart(new MultipartFormData);
                 if(body.get())
         {
-            body->toMultipart(multipart, utility::conversions::to_string_t("body"));
+                    auto t = body.get();
+                    t->toMultipart(multipart, utility::conversions::to_string_t("body"));
         }
 
         httpBody = multipart;
